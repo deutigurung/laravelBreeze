@@ -29,5 +29,7 @@ Route::middleware('auth')->group(function () {
 });
 
 //single action controller
-Route::get('/users',\App\Http\Controllers\UserController::class)->name('users');
+//Route::get('/users',\App\Http\Controllers\UserController::class)->name('users');
+
+Route::resource('users',\App\Http\Controllers\UserController::class);
 require __DIR__.'/auth.php';
