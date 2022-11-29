@@ -35,6 +35,9 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
+
+            Route::middleware('web')
+                ->group(base_path('routes/custom.php'));
         });
     }
 
@@ -46,7 +49,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function configureRateLimiting()
     {
         RateLimiter::for('global', function (Request $request) {
-            return Limit::perMinute(3)->response(function (Request $request, array $headers) {
+            return Limit::perMinute(5)->response(function (Request $request, array $headers) {
                 return response('Too many attempts.Please try later...', 429, $headers);
             });
         });
