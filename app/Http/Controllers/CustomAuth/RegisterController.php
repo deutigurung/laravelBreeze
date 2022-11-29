@@ -22,7 +22,12 @@ class RegisterController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+
         Auth::login($user); //login to dashboard as current create authenticated  user
+
+        if(!$user->hasVerifiedEmail()) {
+            return redirect()->route('custom.email_verify');
+        }
         return redirect()->to(RouteServiceProvider::HOME);
     }
 }
