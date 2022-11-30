@@ -11,6 +11,19 @@ Route::name('custom.')->middleware(['guest','throttle:global'])->group(function 
     Route::get('register',[\App\Http\Controllers\CustomAuth\RegisterController::class,'showRegister'])->name('showRegister');
     Route::post('register',[\App\Http\Controllers\CustomAuth\RegisterController::class,'storeRegister'])->name('register');
 
+    //password forget
+    Route::get('forget-password',[\App\Http\Controllers\CustomAuth\PasswordResetController::class,'create'])
+        ->name('password.request');
+
+    Route::post('send-forget-password',[\App\Http\Controllers\CustomAuth\PasswordResetController::class,'store'])
+        ->name('password.send');
+
+    //new password
+    Route::get('reset-password/{token}',[\App\Http\Controllers\CustomAuth\PasswordResetController::class,'passwordResetCreate'])
+        ->name('password.resetCreate');
+
+    Route::post('reset-password',[\App\Http\Controllers\CustomAuth\PasswordResetController::class,'passwordResetStore'])
+        ->name('password.resetStore');
 });
 
 Route::name('custom.')->middleware('auth')->group(function () {
