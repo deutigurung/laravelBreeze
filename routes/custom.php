@@ -39,3 +39,10 @@ Route::name('custom.')->middleware('auth')->group(function () {
         ->middleware(['throttle:6,1'])->name('verification.verify');
 
 });
+
+//password confirmation
+Route::get('confirm-password',[\App\Http\Controllers\CustomAuth\PasswordResetController::class,'confirmPassword'])
+    ->name('password.confirm');
+
+Route::post('confirm-password',[\App\Http\Controllers\CustomAuth\PasswordResetController::class,'validConfirmPassword'])
+    ->middleware('throttle:6,1');

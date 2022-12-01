@@ -53,4 +53,16 @@ class PasswordResetController extends Controller
             ->with(['status'=>__($status)]) : back()->withErrors(['email' => [__($status)]]);
 
     }
+
+    public function confirmPassword() {
+        return view('auth.confirm-password');
+    }
+
+    public function validConfirmPassword(Request $request) {
+        if(! Hash::check($request->password,$request->user()->password)) {
+            return back()->withErrors(['password'=>'Invalid password']);
+        }
+        $request->session()->passwordConfirmed();
+        return redirect()->intended();
+    }
 }
