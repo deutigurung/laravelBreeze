@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Users\StoreUserRequest;
 use App\Http\Requests\Users\UpdateUserRequest;
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -21,6 +22,10 @@ class UserController extends Controller
         return view('users.list',compact('users'));
     }
 
+    public function userPost(User $user) {
+        $userPosts = Post::whereBelongsTo($user,'author')->get();
+        return view('users.posts',compact('userPosts','user'));
+    }
     public function create() {
         return view('users.create');
     }

@@ -3,20 +3,15 @@
 
         <div class="relative py-2">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight absolute top-0 left-0">
-                {{ __('Posts') }}
+                {{ $user->name }}
             </h2>
-            <a class="h-7 w-32 absolute top-0 right-0" href="{{ route('posts.create') }}">
-                <h4 class="font-semibold text-xl text-center pr-3 text-gray-800 leading-tight rounded-full bg-green-500">
-                    <i class="fa-light fa-plus px-1"></i>{{ __('Add Post') }}
-                </h4>
-            </a>
         </div>
     </x-slot>
-
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
+                    <h2>{{ $user->name }} Posts</h2>
                     <table class="table-auto border-collapse border w-full text-justify">
                         <thead>
                         <tr>
@@ -30,7 +25,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($posts as $key=>$post)
+                        @foreach($userPosts as $key=>$post)
                             <tr>
                                 <td class="border border-slate-300">{{ $key+1 }}</td>
                                 <td class="border border-slate-300">{{ $post->title }}</td>
@@ -54,4 +49,3 @@
         </div>
     </div>
 </x-app-layout>
-

@@ -39,7 +39,8 @@
                                         </button>
                                     </td>
                                     <td class="border border-slate-300">
-                                        <a href="{{ route('users.edit',$user->id) }}">Edit</a>
+                                        <a href="{{ route('users.edit',$user->id) }}">Edit</a> /
+                                        <a href="{{ route('users.userPost',$user->id) }}">Posts</a>
                                     </td>
                                 </tr>
                             @endforeach

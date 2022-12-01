@@ -40,4 +40,8 @@ class Post extends Model
     public function scopePostStatus($query,$status) {
         return $query->where('approved',$status);
     }
+
+    public function comments() {
+        return $this->hasMany(Comment::class);
+    }
 }

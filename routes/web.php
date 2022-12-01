@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function () {
 //Route::get('/users',\App\Http\Controllers\UserController::class)->name('users');
 
 Route::middleware(['auth','emailVerify'])->group(function() {
+    Route::get('users/posts/{user}',[\App\Http\Controllers\UserController::class,'userPost'])->name('users.userPost');
     Route::resource('users',\App\Http\Controllers\UserController::class);
 
     Route::get('posts/duplicate/{id}',[\App\Http\Controllers\PostController::class,'duplicate'])->name('posts.duplicate');

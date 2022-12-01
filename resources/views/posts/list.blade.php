@@ -27,6 +27,7 @@
                             <th class="border border-slate-400">Status</th>
                             <th class="border border-slate-400">Publish Date</th>
                             <th class="border border-slate-400">Author</th>
+                            <th class="border border-slate-400">Total Comment</th>
                             <th class="border border-slate-400">Actions</th>
                         </tr>
                         </thead>
@@ -43,7 +44,9 @@
                                 </td>
                                 <td class="border border-slate-300">{{ $post->publish_date->toFormattedDateString() }}</td>
                                 <td class="border border-slate-300">{{ $post->author->name }}</td>
+                                <td class="border border-slate-300">{{ $post->comments_count }}</td>
                                 <td class="border border-slate-300">
+                                    <a href="{{ route('posts.show',$post->id) }}">View</a> /
                                     <a href="{{ route('posts.edit',$post->id) }}">Edit</a> /
                                     <a href="{{ route('posts.duplicate',$post->id) }}">Duplicate</a>
                                 </td>
@@ -63,6 +66,7 @@
                             <th class="border border-slate-400">Status</th>
                             <th class="border border-slate-400">Publish Date</th>
                             <th class="border border-slate-400">Author</th>
+                            <th class="border border-slate-400">Total Comment</th>
                             <th class="border border-slate-400">Actions</th>
                         </tr>
                         </thead>
@@ -79,9 +83,31 @@
                                 </td>
                                 <td class="border border-slate-300">{{ $post->publish_date->toFormattedDateString() }}</td>
                                 <td class="border border-slate-300">{{ $post->author->name }}</td>
+                                <td class="border border-slate-300">{{ $post->comments_count }}</td>
                                 <td class="border border-slate-300">
                                     <a href="{{ route('posts.edit',$post->id) }}">Edit</a>
                                 </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div class="p-6 text-gray-900">
+                    <h2>Posts having comments</h2>
+                    <table class="table-auto border-collapse border w-full text-justify">
+                        <thead>
+                        <tr>
+                            <th class="border border-slate-400">#</th>
+                            <th class="border border-slate-400">Title</th>
+                            <th class="border border-slate-400">Author</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($postHavingComments as $key=>$post)
+                            <tr>
+                                <td class="border border-slate-300">{{ $key+1 }}</td>
+                                <td class="border border-slate-300">{{ $post->title }}</td>
+                                <td class="border border-slate-300">{{ $post->author->name ?? ''}}</td>
                             </tr>
                         @endforeach
                         </tbody>

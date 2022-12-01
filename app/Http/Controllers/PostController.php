@@ -15,9 +15,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        $approved_userPosts = Post::whereRelation('author','is_admin','=',1)->get();
-        $unapproved_userPosts = Post::whereRelation('author','is_admin','=',0)->get();
-        return view('posts.list',compact('approved_userPosts','unapproved_userPosts'));
+        $approved_userPosts = Post::withCount('comments')->whereRelation('author','is_admin','=',1)->get();
+        $unapproved_userPosts = Post::withCount('comments')->whereRelation('author','is_admin','=',0)->get();
+        $postHavingComments = Post::has('comments')->get();
+        return view('posts.list',compact('approved_userPosts','unapproved_userPosts','postHavingComments'));
     }
 
     /**
@@ -50,7 +51,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('posts.show',compact('post'));
     }
 
     /**
