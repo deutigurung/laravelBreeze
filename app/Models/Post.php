@@ -36,4 +36,8 @@ class Post extends Model
     public function approvedUser() {
         return $this->belongsTo(User::class)->where('is_admin',1)->orderBy('id');
     }
+
+    public function scopePostStatus($query,$status) {
+        return $query->where('approved',$status);
+    }
 }
