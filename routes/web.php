@@ -31,5 +31,9 @@ Route::middleware('auth')->group(function () {
 //single action controller
 //Route::get('/users',\App\Http\Controllers\UserController::class)->name('users');
 
-Route::resource('users',\App\Http\Controllers\UserController::class);
+Route::middleware(['auth','emailVerify'])->group(function() {
+    Route::resource('users',\App\Http\Controllers\UserController::class);
+    Route::resource('posts',\App\Http\Controllers\PostController::class);
+
+});
 //require __DIR__.'/auth.php';
