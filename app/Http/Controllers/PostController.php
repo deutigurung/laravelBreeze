@@ -94,4 +94,10 @@ class PostController extends Controller
         $post->delete();
         return redirect()->route('posts.index')->with(['status','Post Deleted']);
     }
+
+    public function duplicate(Post $post) {
+        $copyPost = $post->replicate();
+        $copyPost->save();
+        return redirect()->route('posts.index')->with(['status','Post Duplicated']);
+    }
 }

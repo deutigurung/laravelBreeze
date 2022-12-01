@@ -44,7 +44,8 @@
                                 <td class="border border-slate-300">{{ $post->publish_date->toFormattedDateString() }}</td>
                                 <td class="border border-slate-300">{{ $post->author->name }}</td>
                                 <td class="border border-slate-300">
-                                    <a href="{{ route('posts.edit',$post->id) }}">Edit</a>
+                                    <a href="{{ route('posts.edit',$post->id) }}">Edit</a> /
+                                    <a href="{{ route('posts.duplicate',$post->id) }}">Duplicate</a>
                                 </td>
                             </tr>
                         @endforeach

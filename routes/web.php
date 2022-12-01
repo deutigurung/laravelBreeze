@@ -33,6 +33,8 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth','emailVerify'])->group(function() {
     Route::resource('users',\App\Http\Controllers\UserController::class);
+
+    Route::get('posts/duplicate/{id}',[\App\Http\Controllers\PostController::class,'duplicate'])->name('posts.duplicate');
     Route::resource('posts',\App\Http\Controllers\PostController::class);
 
 });
